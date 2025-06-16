@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ホテル英語学習アプリ | Hotel English Learning App</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- ヘッダー -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>🏨 Hotel English</h1>
+                <p>ホテル従業員のための英語学習</p>
+            </div>
+            <div class="header-controls">
+                <button class="lang-toggle" id="langToggle">
+                    <span class="flag">🇯🇵</span>
+                    <span class="text">日本語</span>
+                </button>
+                <div class="progress-indicator">
+                    <span class="progress-label">学習進度</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                    </div>
+                    <span class="progress-text" id="progressText">0%</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- メインナビゲーション -->
+    <nav class="main-nav">
+        <div class="container">
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <button class="nav-button active" data-module="home">
+                        <span class="icon">🏠</span>
+                        <span class="text">ホーム</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-button" data-module="checkin">
+                        <span class="icon">✅</span>
+                        <span class="text">チェックイン</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-button" data-module="checkout">
+                        <span class="icon">🚪</span>
+                        <span class="text">チェックアウト</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-button" data-module="roomservice">
+                        <span class="icon">📞</span>
+                        <span class="text">ルームサービス</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-button" data-module="pronunciation">
+                        <span class="icon">🗣️</span>
+                        <span class="text">発音ガイド</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-button" data-module="strategies">
+                        <span class="icon">📚</span>
+                        <span class="text">学習戦略</span>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- メインコンテンツ -->
+    <main class="main-content">
+        <div class="container">
+            <!-- ホームモジュール -->
+            <section class="module active" id="homeModule">
+                <div class="welcome-section">
+                    <h2>ホテル英語学習アプリへようこそ！</h2>
+                    <p class="welcome-text">
+                        日本人ホテル従業員のための実践的な英語学習プラットフォームです。<br>
+                        実際のホテル業務で使用する英語表現を効率的に学習できます。
+                    </p>
+                    
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">✅</div>
+                            <h3>チェックイン対応</h3>
+                            <p>お客様のチェックイン時に使用する基本的な英語表現と会話の流れを学習</p>
+                            <button class="btn-primary" onclick="switchModule('checkin')">学習開始</button>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">🚪</div>
+                            <h3>チェックアウト対応</h3>
+                            <p>チェックアウト時の請求、支払い、お見送りまでの英語表現を習得</p>
+                            <button class="btn-primary" onclick="switchModule('checkout')">学習開始</button>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">📞</div>
+                            <h3>ルームサービス</h3>
+                            <p>客室からの電話対応、ルームサービス注文の受付方法を学習</p>
+                            <button class="btn-primary" onclick="switchModule('roomservice')">学習開始</button>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">🗣️</div>
+                            <h3>発音改善</h3>
+                            <p>日本人が苦手とする英語の音を中心とした発音改善ガイド</p>
+                            <button class="btn-primary" onclick="switchModule('pronunciation')">学習開始</button>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">📚</div>
+                            <h3>学習戦略</h3>
+                            <p>効果的な英語学習方法とモチベーション維持のテクニック</p>
+                            <button class="btn-primary" onclick="switchModule('strategies')">学習開始</button>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">🎯</div>
+                            <h3>練習クイズ</h3>
+                            <p>学習した内容を確認できるインタラクティブなクイズ機能</p>
+                            <button class="btn-primary" onclick="startQuiz()">クイズ開始</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="learning-stats">
+                    <h3>学習統計</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-number" id="totalLessons">0</div>
+                            <div class="stat-label">完了レッスン</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" id="studyTime">0</div>
+                            <div class="stat-label">学習時間（分）</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" id="quizScore">0</div>
+                            <div class="stat-label">平均クイズ得点</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" id="streakDays">0</div>
+                            <div class="stat-label">連続学習日数</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- チェックインモジュール -->
+            <section class="module" id="checkinModule">
+                <div class="module-header">
+                    <h2>チェックイン対応</h2>
+                    <p>お客様のチェックイン時に使用する英語表現を学習します</p>
+                </div>
+                
+                <div class="lesson-content">
+                    <div class="lesson-nav">
+                        <button class="lesson-tab active" data-lesson="greetings">挨拶・お出迎え</button>
+                        <button class="lesson-tab" data-lesson="reservation">予約確認</button>
+                        <button class="lesson-tab" data-lesson="documents">身分証明書</button>
+                        <button class="lesson-tab" data-lesson="keys">鍵のお渡し</button>
+                        <button class="lesson-tab" data-lesson="facilities">施設案内</button>
+                    </div>
+                    
+                    <div class="lesson-panel active" id="greetings">
+                        <h3>基本的な挨拶とお出迎え</h3>
+                        <div class="phrase-list">
+                            <div class="phrase-item">
+                                <div class="phrase-english">
+                                    <span class="phrase-text">Good morning! Welcome to our hotel. How can I help you today?</span>
+                                    <button class="play-audio" data-text="Good morning! Welcome to our hotel. How can I help you today?">🔊</button>
+                                </div>
+                                <div class="phrase-pronunciation">グッd モーニング! ウェルカム トゥ アワー ホウテル. ハウ キャン アイ ヘルプ ユー トゥデイ?</div>
+                                <div class="phrase-japanese">おはようございます！当ホテルへようこそ。本日はいかがなさいましたか？</div>
+                                <div class="phrase-tips">
+                                    <strong>発音のコツ:</strong> "Welcome"の「l」音に注意。舌先を上の前歯の裏に軽く触れる
+                                </div>
+                            </div>
+                            
+                            <div class="phrase-item">
+                                <div class="phrase-english">
+                                    <span class="phrase-text">Good afternoon! How may I assist you?</span>
+                                    <button class="play-audio" data-text="Good afternoon! How may I assist you?">🔊</button>
+                                </div>
+                                <div class="phrase-pronunciation">グッd アフタヌーン! ハウ メイ アイ アシスト ユー?</div>
+                                <div class="phrase-japanese">こんにちは！いかがいたしましょうか？</div>
+                                <div class="phrase-tips">
+                                    <strong>使用時間:</strong> 12:00-18:00頃まで使用可能
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="practice-section">
+                            <h4>練習問題</h4>
+                            <div class="practice-item">
+                                <p>お客様が午前中にフロントに来ました。適切な挨拶を選んでください：</p>
+                                <div class="quiz-options">
+                                    <button class="quiz-option" data-correct="true">Good morning! Welcome to our hotel.</button>
+                                    <button class="quiz-option">Good evening! Welcome to our hotel.</button>
+                                    <button class="quiz-option">Hello! Nice to meet you.</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 他のレッスンパネルもここに追加 -->
+                </div>
+            </section>
+
+            <!-- その他のモジュールプレースホルダー -->
+            <section class="module" id="checkoutModule">
+                <div class="module-header">
+                    <h2>チェックアウト対応</h2>
+                    <p>チェックアウト時の対応を学習します</p>
+                </div>
+                <div class="content-placeholder">
+                    <p>チェックアウト対応のコンテンツを読み込み中...</p>
+                </div>
+            </section>
+
+            <section class="module" id="roomserviceModule">
+                <div class="module-header">
+                    <h2>ルームサービス・電話対応</h2>
+                    <p>電話での対応方法を学習します</p>
+                </div>
+                <div class="content-placeholder">
+                    <p>ルームサービス対応のコンテンツを読み込み中...</p>
+                </div>
+            </section>
+
+            <section class="module" id="pronunciationModule">
+                <div class="module-header">
+                    <h2>発音改善ガイド</h2>
+                    <p>日本人のための英語発音のコツを学習します</p>
+                </div>
+                <div class="content-placeholder">
+                    <p>発音ガイドのコンテンツを読み込み中...</p>
+                </div>
+            </section>
+
+            <section class="module" id="strategiesModule">
+                <div class="module-header">
+                    <h2>効果的な学習戦略</h2>
+                    <p>英語学習を効率化する方法を学習します</p>
+                </div>
+                <div class="content-placeholder">
+                    <p>学習戦略のコンテンツを読み込み中...</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- フッター -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Hotel English Learning App. 日本人ホテル従業員のための英語学習プラットフォーム</p>
+        </div>
+    </footer>
+
+    <!-- クイズモーダル -->
+    <div class="modal" id="quizModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>練習クイズ</h3>
+                <button class="modal-close" onclick="closeQuiz()">&times;</button>
+            </div>
+            <div class="modal-body" id="quizContent">
+                <!-- クイズコンテンツがここに動的に生成される -->
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script src="js/speech.js"></script>
+    <script src="js/quiz.js"></script>
+</body>
+</html>
